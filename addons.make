@@ -1,0 +1,4 @@
+ofxOneDollar
+ofxOpenNI
+ofxPd
+ofxPlaylist
