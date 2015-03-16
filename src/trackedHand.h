@@ -5,6 +5,7 @@
 #include "ofxOneDollar.h"
 #include "circularBuffer.h"
 #include "GestureEvent.h"
+#include "analizador.h"
 
 #define GESTURE_SIZE 100
 
@@ -14,26 +15,32 @@ enum HandType{
 
 class trackedHand{
 public:
-    trackedHand();
+    trackedHand(int _handId);
     ~trackedHand();
-    void findGesture();
+    void findOneDollarGesture();
+    void findPercusiveGesture();
     void addPoint(float x, float y);
     void update();
     void draw();
     void showMessage(string sMessage);
     void showMessage(string sMessage, int nDelay);
     
+    circularBuffer* smoothPosX;
+    circularBuffer* smoothPosY;
     circularBuffer* gestureLineX;
     circularBuffer* gestureLineY;
     ofxOneDollar    dollar;
     ofxGesture*     gesture;
+    Analizador*     percGestAnalizer;
     ofPolyline      line,found_gesture;
     double          score=0.0;
+    
     bool            showText=false;
     string          message;
     int             hide_message_on;
+    int             handId;
     
-    HandType    handType;
+    HandType        handType;
 };
 
 

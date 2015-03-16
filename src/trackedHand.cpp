@@ -3,17 +3,33 @@
 ofEvent <GestureEvent> GestureEvent::gestureDetected;
 
 /*************************************************************************/
-trackedHand::trackedHand(){
-    dollar.load(ofToDataPath("gestures.txt",true));
-    //showMessage("Loaded! Note that saved gestures are rotated to the optimal position!",3000);
-    gestureLineX = new circularBuffer(GESTURE_SIZE);
-    gestureLineY = new circularBuffer(GESTURE_SIZE);
+trackedHand::trackedHand(int _handId){
+    handId = _handId;
+    if (handId%2 == 0) handType = GEO_FIGURE;
+    else handType = L_PERCUSSION;
+    smoothPosX = new circularBuffer(5);
+    smoothPosY = new circularBuffer(5);
+    
+    if (handType == GEO_FIGURE) {
+        dollar.load(ofToDataPath("gestures.txt",true));
+        showMessage("Loaded! Note that saved gestures are rotated to the optimal position!",3000);
+        gestureLineX = new circularBuffer(GESTURE_SIZE);
+        gestureLineY = new circularBuffer(GESTURE_SIZE);
+    }
+    else {
+        percGestAnalizer = new Analizador();
+    }
 }
 
 /*************************************************************************/
 void trackedHand::addPoint(float x, float y){
-    gestureLineX->write(x);
-    gestureLineY->write(y);
+    smoothPosX->write(x);
+    smoothPosY->write(y);
+    if (handType == GEO_FIGURE) {
+        gestureLineX->write(smoothPosX->mean());
+        gestureLineY->write(smoothPosY->mean());
+    }
+    
 }
 
 /*************************************************************************/
@@ -21,11 +37,12 @@ void trackedHand::update(){
     if (showText){
         if(ofGetElapsedTimeMillis() >= hide_message_on){
             showText = false;
-            found_gesture.clear();
+            if (handType == GEO_FIGURE) found_gesture.clear();
         }
     }
     else{
-        findGesture();
+        if(handType == GEO_FIGURE) findOneDollarGesture();
+        else findPercusiveGesture();
     }
 }
 
@@ -35,8 +52,12 @@ void trackedHand::draw(){
         ofSetColor(255, 0, 140);
         ofDrawBitmapString(message, 10, 30);
     }else{
-        ofSetColor(255, 255, 0);
-        line.draw();
+        ofSetColor(255,0,0);
+        ofRect(smoothPosX->mean(), smoothPosY->mean(), 10, 10);
+        if(handType == GEO_FIGURE){
+            ofSetColor(255, 255, 0);
+            line.draw();
+        }
     }
     
     ofSetColor(0, 255, 140);
@@ -44,7 +65,7 @@ void trackedHand::draw(){
 }
 
 /*************************************************************************/
-void trackedHand::findGesture(){
+void trackedHand::findOneDollarGesture(){
     ofxGesture* tmp = new ofxGesture();
     line.clear();
     for(int i=gestureLineX->pW;i>gestureLineX->pW-GESTURE_SIZE;i--){
@@ -72,6 +93,16 @@ void trackedHand::findGesture(){
         showMessage(result, 500);
     }
     delete tmp;
+}
+
+/*************************************************************************/
+void trackedHand::findPercusiveGesture(){
+    if (percGestAnalizer->calcularTodo(smoothPosY->mean()) == "hit" ){
+        static GestureEvent detected;
+        detected.message = "PercHit";
+        ofNotifyEvent(GestureEvent::gestureDetected, detected);
+        showMessage( detected.message , 50 );
+    }
 }
 
 /*************************************************************************/

@@ -40,6 +40,7 @@
 		306628AF1AB62DE0003A9269 /* libXnVHandGenerator_1_5_2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 306628A11AB62DE0003A9269 /* libXnVHandGenerator_1_5_2.dylib */; };
 		306628B01AB62DE0003A9269 /* libXnVNite_1_5_2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 306628A21AB62DE0003A9269 /* libXnVNite_1_5_2.dylib */; };
 		3066293D1AB6389C003A9269 /* trackedHand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3066293B1AB6389C003A9269 /* trackedHand.cpp */; };
+		30B3EAC41AB74A7900CD71CD /* analizador.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30B3EAC31AB74A7900CD71CD /* analizador.cpp */; };
 		36F094871BCE984210F47203 /* pique.c in Sources */ = {isa = PBXBuildFile; fileRef = F7726CE92BC0F833C7140039 /* pique.c */; };
 		3B43120363DE01A16E2ED8D9 /* s_utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB5987705B5E38E576A004 /* s_utf8.c */; };
 		3DA01BF4B40053C9B6A7F66C /* ofxEasing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B11BA4A1A8553DB99738D20 /* ofxEasing.cpp */; };
@@ -358,6 +359,8 @@
 		3066293C1AB6389C003A9269 /* trackedHand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trackedHand.h; sourceTree = "<group>"; };
 		3066293E1AB64A24003A9269 /* GestureEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureEvent.h; sourceTree = "<group>"; };
 		30A100BA1D5AFA3CA62C1C8A /* g_template.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = g_template.c; path = "../../../addons/ofxPd/libs/libpd/pure-data/src/g_template.c"; sourceTree = SOURCE_ROOT; };
+		30B3EAC21AB74A7900CD71CD /* analizador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analizador.h; sourceTree = "<group>"; };
+		30B3EAC31AB74A7900CD71CD /* analizador.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = analizador.cpp; sourceTree = "<group>"; };
 		33A49B2B874C7650F3E7099E /* ofxPd.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxPd.cpp; path = ../../../addons/ofxPd/src/ofxPd.cpp; sourceTree = SOURCE_ROOT; };
 		35204435369D24B91EEC2740 /* ofxEasingElastic.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxEasingElastic.cpp; path = ../../../addons/ofxPlaylist/src/Easings/ofxEasingElastic.cpp; sourceTree = SOURCE_ROOT; };
 		379175356518DF0F9A81762D /* ofxEasingExt.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxEasingExt.h; path = ../../../addons/ofxPlaylist/src/ofxEasingExt.h; sourceTree = SOURCE_ROOT; };
@@ -1182,6 +1185,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				30B3EAC21AB74A7900CD71CD /* analizador.h */,
+				30B3EAC31AB74A7900CD71CD /* analizador.cpp */,
 				3066288D1AB62DBC003A9269 /* animatedFigure.cpp */,
 				3066288E1AB62DBC003A9269 /* animatedFigure.h */,
 				3066288F1AB62DBC003A9269 /* circularBuffer.cpp */,
@@ -1316,6 +1321,7 @@
 				C318655C47AEF7BE8103803A /* d_arithmetic.c in Sources */,
 				A63F0FD6679EDFB16C7B4333 /* d_array.c in Sources */,
 				2DF23C94600F317B51401032 /* d_ctl.c in Sources */,
+				30B3EAC41AB74A7900CD71CD /* analizador.cpp in Sources */,
 				8C4791DC1966643B8C91552B /* d_dac.c in Sources */,
 				4112DA22A38568E370255F1E /* d_delay.c in Sources */,
 				18052988C8ED707F6DBDBAD4 /* d_fft.c in Sources */,

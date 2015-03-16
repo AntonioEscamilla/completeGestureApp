@@ -12,7 +12,7 @@ void ofApp::setup(){
     // setup the hand generator
     openNIDevice.addHandsGenerator();
     openNIDevice.addHandFocusGesture("Wave");
-    openNIDevice.setMaxNumHands(1);
+    openNIDevice.setMaxNumHands(2);
     openNIDevice.start();
     
     // setup OF sound stream & Pd patch
@@ -143,8 +143,17 @@ void ofApp::handEvent(ofxOpenNIHandEvent & event){
     if (event.handStatus!=HAND_TRACKING_UPDATED){
         ofLogNotice() << getHandStatusAsString(event.handStatus) << "for hand" << event.id << "from device" << event.deviceID;
     }
-    if(event.handStatus==HAND_FOCUS_GESTURE_RECOGNIZED){
-        gesturedHands.push_back(new trackedHand());
+    if(event.handStatus==HAND_TRACKING_STARTED){
+        gesturedHands.push_back(new trackedHand(event.id));
+    }
+    if (event.handStatus==HAND_TRACKING_STOPPED) {
+        ofLogNotice() << "antes del HAND_TRACKING_STOPPED: " << "gesturedHands size  = " << gesturedHands.size();
+        for (int i = gesturedHands.size()-1;i>=0;i--){
+            if (gesturedHands[i]->handId==event.id) {
+                gesturedHands.erase(gesturedHands.begin()+i);
+            }
+        }
+        ofLogNotice() << "despues del HAND_TRACKING_STOPPED: " << "gesturedHands size  = " << gesturedHands.size();
     }
 }
 
