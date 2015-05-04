@@ -3,11 +3,21 @@
 ofEvent <GestureEvent> GestureEvent::gestureDetected;
 
 /*************************************************************************/
-trackedHand::trackedHand(int _handId){
+trackedHand::trackedHand(int _handId, int _execiseType){
     handId = _handId;
-    if (handId%2 == 0) handType = GEO_FIGURE;
-    else handType = L_PERCUSSION;
-    smoothPosX = new circularBuffer(5);
+    switch (_execiseType) {
+        case 1:
+            handType = R_PERCUSSION;
+            break;
+        case 2:
+            handType = L_PERCUSSION;
+            break;
+        case 3:
+            handType = GEO_FIGURE;
+            break;
+            
+    }
+    smoothPosX = new circularBuffer(5);//5
     smoothPosY = new circularBuffer(5);
     
     if (handType == GEO_FIGURE) {
@@ -18,18 +28,23 @@ trackedHand::trackedHand(int _handId){
     }
     else {
         percGestAnalizer = new Analizador();
+        gestureLineY = new circularBuffer(15);   //tamaño del buffer para calcular el sumDiff
     }
 }
 
 /*************************************************************************/
 void trackedHand::addPoint(float x, float y){
-    smoothPosX->write(x);
-    smoothPosY->write(y);
+    
     if (handType == GEO_FIGURE) {
+        smoothPosX->writeLerped(x);
+        smoothPosY->writeLerped(y);
+        gestureLineY->write(smoothPosY->mean());
         gestureLineX->write(smoothPosX->mean());
+    }else{
+        smoothPosX->writeLerped(x);
+        smoothPosY->writeLerped(y);
         gestureLineY->write(smoothPosY->mean());
     }
-    
 }
 
 /*************************************************************************/
@@ -62,6 +77,7 @@ void trackedHand::draw(){
     
     ofSetColor(0, 255, 140);
     found_gesture.draw();
+    ofDrawBitmapStringHighlight( " Sum Dif: " + ofToString(gestureLineY->sumDiff()),800,40);
 }
 
 /*************************************************************************/
@@ -97,11 +113,13 @@ void trackedHand::findOneDollarGesture(){
 
 /*************************************************************************/
 void trackedHand::findPercusiveGesture(){
-    if (percGestAnalizer->calcularTodo(smoothPosY->mean()) == "hit" ){
+    if (percGestAnalizer->calcularTodo(smoothPosY->mean()) == "hit" && gestureLineY->sumDiff()>10){
         static GestureEvent detected;
-        detected.message = "PercHit";
+        if(handType==R_PERCUSSION) detected.message = "PercHitR";
+        else detected.message = "PercHitL";
         ofNotifyEvent(GestureEvent::gestureDetected, detected);
-        showMessage( detected.message , 50 );
+        showMessage( detected.message, 50);
+        gestureLineY->resetAtLastPoint();
     }
 }
 

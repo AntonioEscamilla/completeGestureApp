@@ -13,6 +13,13 @@ void circularBuffer::write(float value){
     buffer[wIndex]=value;
 }
 
+void circularBuffer::writeLerped(float value){
+    pW++;
+    int wIndex=pW%size;
+    //interpola la nueva posicion con la anterior (tendiendo a la anterior posicion)
+    buffer[wIndex]=ofLerp(value,buffer[(pW-1)%size],0.7f);
+}
+
 float circularBuffer::sumDiff(){
     float sumDiff=0;
     for(int i=pW;i>pW-size+1;i--){

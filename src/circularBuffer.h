@@ -7,6 +7,7 @@ class circularBuffer{
 public:
     circularBuffer(int size);
     void write(float value);
+    void writeLerped(float value);
     float sumDiff();
     void randomReset();
     void clear();

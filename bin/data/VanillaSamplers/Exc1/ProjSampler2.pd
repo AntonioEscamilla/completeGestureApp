@@ -1,0 +1,119 @@
+#N canvas 52 78 1154 584 10;
+#X obj 446 30 openpanel;
+#X obj 446 72 soundfiler;
+#X obj 449 91 s filesize;
+#X floatatom 542 107 5 0 0 0 - - -, f 5;
+#X obj 174 122 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 608 216 openpanel;
+#X obj 611 259 soundfiler;
+#X obj 611 289 s filesize;
+#X floatatom 703 282 5 0 0 0 - - -, f 5;
+#X obj 176 224 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 945 47 openpanel;
+#X obj 948 90 soundfiler;
+#X obj 948 120 s filesize;
+#X floatatom 1040 113 5 0 0 0 - - -, f 5;
+#X obj 299 120 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Sample01 7508 float 2;
+#X coords 0 1 7508 -1 100 50 1 0 0;
+#X restore 115 140 graph;
+#X obj 316 -52 loadbang;
+#X obj 388 -46 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Sample02 17007 float 2;
+#X coords 0 1 17007 -1 100 50 1 0 0;
+#X restore 114 246 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Sample03 13562 float 2;
+#X coords 0 1 13562 -1 100 50 1 0 0;
+#X restore 230 138 graph;
+#X obj 555 262 print;
+#X obj 902 95 print;
+#X obj 380 80 print;
+#X msg 946 69 read -resize \$1 Sample05;
+#X msg 447 52 read -resize \$1 Sample01;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Sample04 100 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0;
+#X coords 0 1 99 -1 100 50 1 0 0;
+#X restore 233 245 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Sample05 100 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0;
+#X coords 0 1 99 -1 100 50 1 0 0;
+#X restore 162 333 graph;
+#X obj 523 357 openpanel;
+#X obj 526 400 soundfiler;
+#X obj 526 430 s filesize;
+#X floatatom 618 423 5 0 0 0 - - -, f 5;
+#X obj 470 403 print;
+#X msg 524 379 read -resize \$1 Sample02;
+#X msg 609 238 read -resize \$1 Sample03;
+#X msg 481 174 read -resize Song_74Bpm.wav Sample03;
+#X obj 900 242 openpanel;
+#X obj 903 285 soundfiler;
+#X obj 903 315 s filesize;
+#X floatatom 995 308 5 0 0 0 - - -, f 5;
+#X obj 847 288 print;
+#X obj 297 225 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 234 313 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 901 264 read -resize \$1 Sample04;
+#X msg 773 200 read -resize Song_81Bpm.wav Sample04;
+#X msg 840 -8 read -resize Song_87Bpm.wav Sample05;
+#X msg 306 -1 read -resize Song_65Bpm.wav Sample01;
+#X msg 396 315 read -resize Song_71Bpm.wav Sample02;
+#X connect 0 0 24 0;
+#X connect 1 0 2 0;
+#X connect 1 0 3 0;
+#X connect 4 0 0 0;
+#X connect 5 0 33 0;
+#X connect 6 0 7 0;
+#X connect 6 0 8 0;
+#X connect 9 0 27 0;
+#X connect 10 0 23 0;
+#X connect 11 0 12 0;
+#X connect 11 0 13 0;
+#X connect 14 0 5 0;
+#X connect 16 0 45 0;
+#X connect 16 0 34 0;
+#X connect 16 0 44 0;
+#X connect 16 0 46 0;
+#X connect 16 0 43 0;
+#X connect 17 0 45 0;
+#X connect 23 0 11 0;
+#X connect 23 0 21 0;
+#X connect 24 0 1 0;
+#X connect 24 0 22 0;
+#X connect 27 0 32 0;
+#X connect 28 0 29 0;
+#X connect 28 0 30 0;
+#X connect 32 0 28 0;
+#X connect 32 0 31 0;
+#X connect 33 0 6 0;
+#X connect 33 0 20 0;
+#X connect 34 0 6 0;
+#X connect 35 0 42 0;
+#X connect 36 0 37 0;
+#X connect 36 0 38 0;
+#X connect 40 0 35 0;
+#X connect 41 0 10 0;
+#X connect 42 0 36 0;
+#X connect 42 0 39 0;
+#X connect 43 0 36 0;
+#X connect 44 0 11 0;
+#X connect 45 0 1 0;
+#X connect 46 0 28 0;
+#X coords 0 -1 1 1 250 310 1 100 100;

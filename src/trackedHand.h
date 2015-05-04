@@ -15,7 +15,7 @@ enum HandType{
 
 class trackedHand{
 public:
-    trackedHand(int _handId);
+    trackedHand(int _handId, int _handType);
     ~trackedHand();
     void findOneDollarGesture();
     void findPercusiveGesture();

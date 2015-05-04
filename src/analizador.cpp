@@ -15,9 +15,9 @@ float Analizador::calcVel() {
 }
 
 std::string Analizador::calcPend(){
-    if (actV > 0.5) {
+    if (actV > 0.2) {//0.5
         actPend = "positiva";
-    } else if (actV < -1) {
+    } else if (actV < -0.2) { //-1
         actPend = "negativa";
     }else{
         actPend = "cero";

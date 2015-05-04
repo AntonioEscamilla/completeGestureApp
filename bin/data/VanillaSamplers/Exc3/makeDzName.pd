@@ -1,0 +1,30 @@
+#N canvas 466 129 601 290 10;
+#X msg 32 90 set \$1;
+#X obj 32 166 makefilename not-set-yet;
+#X floatatom 41 115 0 0 0 0 - - -;
+#X obj 32 66 makefilename %%d-%s;
+#X obj 32 39 symbol \$1;
+#X obj 34 -54 loadbang;
+#X obj 32 1 t b b;
+#X obj 34 187 outlet;
+#X obj 99 -33 inlet;
+#X obj 69 137 f \$2;
+#X text 112 138 Second Argument must be \$0 to get parents \$0.;
+#X obj 126 113 inlet;
+#X text 180 19 This makes a #-name style name. If no second argument
+is supplied then output should be just "name" and no "-name" or "0-name".
+;
+#X obj 89 1 route set;
+#X text 163 -2 set changes name and leaves the $ var unchanged;
+#X connect 0 0 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 1 0;
+#X connect 3 0 0 0;
+#X connect 4 0 3 0;
+#X connect 6 0 9 0;
+#X connect 6 1 4 0;
+#X connect 8 0 13 0;
+#X connect 9 0 1 0;
+#X connect 11 0 9 1;
+#X connect 13 0 4 1;
+#X connect 13 1 6 0;
